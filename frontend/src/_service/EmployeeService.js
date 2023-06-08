@@ -9,15 +9,6 @@ let getAllEmployees = () => {
 }
 
 /**
- * Récupération d'un employee
- * @param {number} cid 
- * @returns {Promise}
- */
-let getEmployee = (cid) => {
-  return Axios.get('/' + cid)
-}
-
-/**
  * Ajout d'un employee
  * @param {object} employee 
  * @returns {Promise}
@@ -28,10 +19,10 @@ let createEmployee = () => {
   const lastName = document.getElementById('last-name');
   const dateOfBirth = document.getElementById('date-of-birth');
   const startDate = document.getElementById('start-date');
-  const department = document.getElementById('department');
+  const department = document.getElementsByClassName('selectDepartement__single-value');
   const street = document.getElementById('street');
   const city = document.getElementById('city');
-  const state = document.getElementById('state');
+  const state = document.getElementsByClassName('selectState__single-value');
   const zipCode = document.getElementById('zip-code');
 
   let employee = {
@@ -44,32 +35,9 @@ let createEmployee = () => {
     city: city.value,
     state: state.value,
     zipCode: zipCode.value
-  };
-  console.log(employee)
+  }
   return Axios.post('/employee/', employee)
 }
 
-/**
- * Mise à jour d'un employee
- * @param {object} employee 
- * @returns {Promise}
- */
-let updateEmployee = (employee) => {
-  // const saveEmployee = () => {
-  // function saveEmployee() {
-  return Axios.post('/', employee)
-}
-
-/**
- * Suppression d'un employee
- * @param {number} cid 
- * @returns {Promise}
- */
-let deleteEmployee = (cid) => {
-  return Axios.delete('/' + cid)
-}
-
 // Déclaration des services pour import
-export const employeeService = {
-  getAllEmployees, getEmployee, createEmployee, updateEmployee, deleteEmployee
-}
+export const employeeService = { getAllEmployees, createEmployee }

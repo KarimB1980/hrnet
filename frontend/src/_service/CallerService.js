@@ -7,13 +7,13 @@ const Axios = axios.create({
 
 // Interceptor for placing the token in the request
 Axios.interceptors.request.use(request => {
-  console.log(request)
+  // console.log(request)
   return request
 })
 
 // API response interceptor for session verification
 Axios.interceptors.response.use(response => {
-  console.log(response)
+  // console.log(response)
   return response
 }, error => {
   if(error.response.status === 401){

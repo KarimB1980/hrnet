@@ -61,7 +61,7 @@ const Home = () => {
           <SelectDepartment />
         </form>
 
-        <button onClick={createEmployee}>Save</button>
+        <button id='save' onClick={createEmployee}>Save</button>
 
       </div>
       {/* <div id="confirmation" className="modal">Employee Created!</div> */}

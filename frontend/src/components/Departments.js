@@ -4,7 +4,6 @@ import { departmentService } from '../_service/DepartmentService'
 
 const dataDepartment = await departmentService.getAllDepartments()
 const data = dataDepartment.data
-// console.log(data)
 
 const handleChange = (selected) => {
   const department = document.getElementsByClassName('selectDepartement__single-value')

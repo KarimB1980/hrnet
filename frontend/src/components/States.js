@@ -6,7 +6,6 @@ const dataState = await stateService.getAllStates()
 const data = dataState.data
 
 const handleChange = (selected) => {
-  console.log(selected.label);
   const state = document.getElementsByClassName('selectState__single-value')
   state.value = selected.label
 }

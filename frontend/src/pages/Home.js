@@ -6,16 +6,23 @@ import SelectDepartment from '../components/Departments'
 import SelectState from '../components/States'
 import CalendarDate from '../components/Calendar'
 
+import Modal from '../components/Modal'
+// import { Modal } from '@k90891695/modalnpm'
+
+import styles from './style/Home.module.css';
+
 // Creation of the home page
 const Home = () => {
   const createEmployee = () => {
     if (document.getElementById('first-name').value !== '' & document.getElementById('last-name').value !== '' & document.getElementById('date-of-birth').value !== '' & document.getElementById('start-date').value !== '' & document.getElementById('street').value !== '' & document.getElementById('city').value !== '' & document.getElementsByClassName('selectState__single-value').value !== '' & document.getElementsByClassName('selectDepartement__single-value').value !== '' & document.getElementById('zip-code').value !== '') {
       employeeService.createEmployee()
+      setIsOpen(true);
     }
   }
 
   const [showBirthCalendar, setShowBirthCalendar] = useState(true);
   const [showStartCalendar, setShowStartCalendar] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -61,12 +68,12 @@ const Home = () => {
           <SelectDepartment />
         </form>
 
-        <button id='save' onClick={createEmployee}>Save</button>
+        <button className={styles.primaryBtn} id='save' onClick ={createEmployee}>Save</button>
+        {isOpen && <Modal setIsOpen={setIsOpen} color={'#d0fefd'} information={'Information'} commentary={'Employee Created !'} action={'Close'} />}
 
       </div>
-      {/* <div id="confirmation" className="modal">Employee Created!</div> */}
     </div>
-  );
-};
+  )
+}
 
 export default Home;

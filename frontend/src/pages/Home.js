@@ -6,7 +6,6 @@ import SelectDepartment from '../components/Departments'
 import SelectState from '../components/States'
 import CalendarDate from '../components/Calendar'
 
-// import Modal from '../components/Modal'
 import { Modal } from '@k90891695/modalnpm'
 
 import styles from './style/Home.module.css';

@@ -13,28 +13,17 @@ let getAllEmployees = () => {
  * @param {object} employee 
  * @returns {Promise}
  */
-// let createEmployee = (employee) => {
 let createEmployee = () => {
-  const firstName = document.getElementById('first-name');
-  const lastName = document.getElementById('last-name');
-  const dateOfBirth = document.getElementById('date-of-birth');
-  const startDate = document.getElementById('start-date');
-  const department = document.getElementsByClassName('selectDepartement__single-value');
-  const street = document.getElementById('street');
-  const city = document.getElementById('city');
-  const state = document.getElementsByClassName('selectState__single-value');
-  const zipCode = document.getElementById('zip-code');
-
   let employee = {
-    firstName: firstName.value,
-    lastName: lastName.value,
-    dateOfBirth: dateOfBirth.value,
-    startDate: startDate.value,
-    department: department.value,
-    street: street.value,
-    city: city.value,
-    state: state.value,
-    zipCode: zipCode.value
+    firstName: localStorage.getItem('firstName'),
+    lastName: localStorage.getItem('lastName'),
+    dateOfBirth: localStorage.getItem('dateOfBirth'),
+    startDate: localStorage.getItem('startDate'),
+    department: localStorage.getItem('selectDepartment'),
+    street: localStorage.getItem('street'),
+    city: localStorage.getItem('city'),
+    state: localStorage.getItem('selectState'),
+    zipCode: localStorage.getItem('zipCode')
   }
   return Axios.post('/employee/', employee)
 }

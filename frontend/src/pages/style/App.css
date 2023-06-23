@@ -25,3 +25,19 @@ label {
   position: absolute;
   z-index: 1;
 }
+
+p {
+  color: #bf1650;
+}
+
+p::before {
+  display: inline;
+  content: "⚠ ";
+}
+
+#create-employee {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

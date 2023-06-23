@@ -5,11 +5,11 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ 
     baseUrl: "http://localhost:3000/api" 
   }),
-  tagTypes: ['Post'],
+  tagTypes: ['Employee'],
   endpoints: (builder) => ({
     getAllEmployees: builder.query({
       query: () => '/employee',
-      providesTags: ['Post'],
+      providesTags: ['Employee'],
     }),
     createEmployee: builder.mutation({
       query: (payload) => ({
@@ -20,9 +20,17 @@ export const apiSlice = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      invalidatesTags: ['Post'],
     }),
+    getAllStates: builder.query({
+      query: () => '/state',
+      providesTags: ['Employee'],
+    }),
+    getAllDepartments: builder.query({
+      query: () => '/department',
+      providesTags: ['Employee'],
+    }),
+    invalidatesTags: ['Employee'],
   }),
 });
 
-export const { useGetAllEmployeesQuery,useCreateEmployeeMutation } = apiSlice;
+export const { useGetAllEmployeesQuery,useCreateEmployeeMutation,useGetAllStatesQuery,useGetAllDepartmentsQuery } = apiSlice;

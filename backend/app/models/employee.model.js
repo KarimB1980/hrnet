@@ -11,8 +11,8 @@ module.exports = mongoose => {
       state: { type: String, required: true },
       zipCode: { type: Number, required: true }
     }
-  );
+  )
 
-  const Employee = mongoose.model("employee", schema);
-  return Employee;
-};
+  const Employee = mongoose.model("employee", schema)
+  return Employee
+}

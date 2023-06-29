@@ -3,158 +3,167 @@ import { Link } from 'react-router-dom'
 import { useCreateEmployeeMutation } from '../redux/apiSlice'
 import styles from './style/Home.module.css'
 import Select from 'react-select'
-import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css'
 import { Modal } from '@k90891695/modalnpm'
-
 import { useGetAllStatesQuery } from "../redux/apiSlice"
 import { useGetAllDepartmentsQuery } from "../redux/apiSlice"
 
-import { useForm } from "react-hook-form";
-
 function Home() {
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm();
-
-  console.log(errors);
-
-  let formSubmitError
   let [isOpen, setIsOpen] = useState(false)
-  let [showBirthCalendar, setShowBirthCalendar] = useState(true)
-  let [showStartCalendar, setShowStartCalendar] = useState(true)
-  let [startDate, setStartDate] = useState('')
+  let [isOpenError, setIsOpenError] = useState(false)
+
   let [selectState, setSelectState] = useState('')
-  let [dateOfBirth, setDateOfBirth] = useState('')
   let [selectDepartment, setSelectDepartment] = useState('')
 
-  let [clickBirthDateCalendar, setClickBirthDateCalendar] = useState('')
-  clickBirthDateCalendar = () => {
-    if(dateOfBirth) {
-      const ClickBirthDateCalendar =   new Date(dateOfBirth).toLocaleDateString()
-      return ClickBirthDateCalendar
+  const [user, setUser] = useState([])
+
+  const handleSubmit = (e) => {
+      e.preventDefault()
+
+    if(user.firstName!==undefined & user.lastName!==undefined & ClickBirthDateCalendar!=='Invalid Date' & ClickStartDateCalendar!=='Invalid Date' & Department!==undefined & user.street!==undefined & user.city!==undefined & State!==undefined & user.zipCode!==undefined) {
+
+      console.log('submit')
+
+      let formData = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        dateOfBirth: ClickBirthDateCalendar,
+        startDate: ClickStartDateCalendar,
+        department: Department,
+        street: user.street,
+        city: user.city,
+        state: State,
+        zipCode: user.zipCode,
+      }
+
+      addNewEmployee(formData)
+        .unwrap()
+        .then((payload) => console.log('fulfilled', payload))
+        .catch((error) => console.error('rejected', error))
+
+      setIsOpen(true)
+
+    } else {
+      setIsOpenError(true)
     }
   }
   
-  let [clickStartDateCalendar, setClickStartDateCalendar] = useState('')
-  clickStartDateCalendar = () => {
-    if(startDate) {
-      const ClickStartDateCalendar =   new Date(startDate).toLocaleDateString()
-      return ClickStartDateCalendar
-    }
-  }
-
-  const [addNewEmployee] = useCreateEmployeeMutation()
-
-  const onSubmit = (data, e) => {
-    e.preventDefault()
-    const { firstName, lastName, dateOfBirth, startDate, street, city, zipCode } = e.target.elements
-
-    let formData = {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      dateOfBirth: dateOfBirth.value,
-      startDate: startDate.value,
-      department: Department,
-      street: street.value,
-      city: city.value,
-      state: State,
-      zipCode: zipCode.value,
-    }
-
-    addNewEmployee(formData)
-    .unwrap()
-    .then((payload) => console.log('fulfilled', payload))
-    .catch((error) => console.error('rejected', error))
-
-    setIsOpen(true)
-
-    reset({
-      firstName: '',
-      lastName: '',
-      dateOfBirth: '',
-      startDate: '',
-      department: '',
-      street: '',
-      city: '',
-      state: '',
-      zipCode: '',
+  const onChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
     })
   }
+
+  const [dateOfBirth, setDateOfBirth] = useState('')
+  const onNativeBirthdateChange = e => {
+    setDateOfBirth(e.target.value);
+  };
+
+  const [startDate, setStartDate] = useState('')
+  const onNativeStartdateChange = e => {
+    setStartDate(e.target.value);
+  };
+
+  const ClickBirthDateCalendar = new Date(dateOfBirth).toLocaleDateString()
+  const ClickStartDateCalendar = new Date(startDate).toLocaleDateString()
+
+  const [addNewEmployee] = useCreateEmployeeMutation()
 
   const State = selectState.label
   const Department = selectDepartment.label
 
-  const {data} = useGetAllStatesQuery()
+  const { data } = useGetAllStatesQuery()
   const [statesData, setStatesData] = useState([])
   useEffect(() => {
     setStatesData(data)
   }, [data])
 
-  const {currentData} = useGetAllDepartmentsQuery()
+  const { currentData } = useGetAllDepartmentsQuery()
   const [departmentsData, setDepartmentsData] = useState([])
   useEffect(() => {
     setDepartmentsData(currentData)
   }, [currentData])
 
+  console.log(user.firstName)
+  console.log(user.lastName)
+  console.log(ClickBirthDateCalendar)
+  console.log(ClickStartDateCalendar)
+  console.log(Department)
+  console.log(State)
+  console.log(user.street)
+  console.log(user.city)
+  console.log(State)
+  console.log(user.zipCode)
+
   return (
     <div>
-      {formSubmitError}
       <div className="title">
         <h1>HRnet</h1>
       </div>
       <div className="container">
         <Link to="/employee-list">View Current Employees</Link>
         <h2>Create Employee</h2>
-        <form id="create-employee" name="createemployee" onSubmit={handleSubmit(onSubmit)}>
+        <form id="create-employee" name="createemployee" onSubmit={handleSubmit}>
 
           <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" {...register("firstName", { required: true })} />
-          {errors.firstName && <p>This is required</p>}
+          <input 
+            name='firstName'
+            type="text" 
+            id="firstName" 
+            value={user.firstName || ""} 
+            onChange={onChange}
+          />
 
           <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" {...register("lastName", { required: true })} />
-          {errors.lastName && <p>This is required</p>}
-
-          <label htmlFor="dateOfBirth">Date of Birth</label>
-          <input type="text" id="dateOfBirth" {...register("dateOfBirth", { required: true })}
-            onClick={() => setShowBirthCalendar(!showBirthCalendar)} 
-            value={clickBirthDateCalendar() || ''} 
-            onChange={(e)=>setClickBirthDateCalendar(e.target.value)} 
+          <input 
+            name='lastName'
+            type="text" 
+            id="lastName" 
+            value={user.lastName || ""} 
+            onChange={onChange}
           />
-          {errors.dateOfBirth && <p>This is required</p>}
-          {!showBirthCalendar &&
-            <Calendar onChange={setDateOfBirth} value={dateOfBirth}/>
-          }
 
-          <label htmlFor="startDate">Start Date</label>
-          <input id="startDate" type="text" {...register("startDate", { required: true })}
-            onClick={() => setShowStartCalendar(!showStartCalendar)} 
-            value={clickStartDateCalendar() || ''} 
-            onChange={(e)=>setClickStartDateCalendar(e.target.value)} 
+          <label>Date of birth </label>
+          <input 
+            type="date" 
+            name="dateOfBirth" 
+            value={dateOfBirth} 
+            onChange={onNativeBirthdateChange} 
           />
-          {errors.startDate && <p>This is required</p>}
-          {!showStartCalendar &&
-            <Calendar onChange={setStartDate} value={startDate}/>
-          }
+
+
+          <label>Start date</label>
+          <input 
+            type="date" 
+            name="startDate" 
+            value={startDate} 
+            onChange={onNativeStartdateChange} 
+          />
 
           <fieldset className="address">
             <legend>Address</legend>
 
             <label htmlFor="street">Street</label>
-            <input id="street" type="text" {...register("street", { required: true })}/>
-            {errors.street && <p>This is required</p>}
+            <input 
+              name='street'
+              id="street" 
+              type="text" 
+              value={user.street || ""} 
+              onChange={onChange}
+            />
 
             <label htmlFor="city">City</label>
-            <input id="city" type="text" {...register("city", { required: true })}/>
-            {errors.city && <p>This is required</p>}
+            <input 
+              name='city'
+              id="city" 
+              type="text" 
+              value={user.city || ""} 
+              onChange={onChange}
+            />
 
-            <h3>State</h3>
-            <Select 
+            <label htmlFor="data-state">State</label>
+            <Select
               className='data-state'
               classNamePrefix='selectState'
               options={statesData}
@@ -162,12 +171,17 @@ function Home() {
             />
 
             <label htmlFor="zipCode">Zip Code</label>
-            <input id="zipCode" type="number" {...register("zipCode", { required: true })}/>
-            {errors.zipCode && <p>This is required</p>}
+            <input 
+              name='zipCode'
+              id="zipCode" 
+              type="number" 
+              value={user.zipCode || ""} 
+              onChange={onChange}
+            />
           </fieldset>
 
-          <h3>Department</h3>
-          <Select 
+          <label htmlFor="data-department">Department</label>
+          <Select
             className='data-department'
             classNamePrefix='selectDepartment'
             options={departmentsData}
@@ -175,7 +189,9 @@ function Home() {
           />
 
           <button className={styles.primaryBtn} id='save' type="submit">Save</button>
-          {isOpen && <Modal setIsOpen={setIsOpen} color={'#d0fefd'} information={'Information'} commentary={'Employee Created !'} action={'Close'}/>}
+          {isOpen && <Modal setIsOpen={() => {setIsOpen(); window.location.reload(false)}} color={'#d0fefd'} information={'Information'} commentary={'Employee Created !'} action={'Close'} />}
+          {isOpenError && <Modal setIsOpen={setIsOpenError} color={'#fecccc'} information={'Information'} commentary={'Employee Not Created ! Please complete all fields.'} action={'Close'} />}
+
         </form>
 
       </div>

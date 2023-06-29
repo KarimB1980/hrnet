@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <ApiProvider api={apiSlice}>
       <App />
-    </ApiProvider >  
+    </ApiProvider>
   </React.StrictMode>
 );
 

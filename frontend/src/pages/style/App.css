@@ -1,4 +1,4 @@
-.title {
+/* .title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,14 +30,233 @@ p {
   color: #bf1650;
 }
 
+/* p::before {
+  display: inline;
+  content: "⚠ ";
+} */
+
+/* #create-employee {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+body {
+  /* background: #0e101c; */
+  background-image: url('../../../public/background.jpeg');
+  background-size: 100% auto;
+  background-attachment: fixed;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+form {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstName, .lastName, .dateOfBirth, .startDate, .street, .city, .state, .zipCode, .department {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 60px;
+  color: white;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(79, 98, 148);
+  -webkit-text-stroke: 3px rgb(0, 0, 0);
+  width: 100%;
+}
+
+h2, legend {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  -webkit-text-stroke: 1px rgb(0, 0, 0);
+}
+
+.form {
+  background: #0e101c;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+p {
+  /* color: #bf1650; */
+  color: red;
+  margin-top: 0;
+  border: 2px solid red;
+  background-color: #c3ff7e;
+  padding: 5px;
+  font-weight: 900;
+  border-radius: 5px;
+}
+
 p::before {
   display: inline;
   content: "⚠ ";
 }
 
-#create-employee {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid white;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.css-b62m3t-container, .FirstName, .LastName, .DateOfBirth, .StartDate, .Street, .City, .ZipCode {
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+}
+
+label, .sc-iHGNWf, .sc-bXCLTC option {
+  line-height: 2;
+  text-align: left;
+  display: block;
+  /* margin-bottom: 13px; */
+  margin-top: 20px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  /* background-color: black;
+  padding: 5px;
+  border-radius: 5px; */
+  -webkit-text-stroke: 1px rgb(0, 0, 0);
+}
+
+.css-b62m3t-container {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+button[type="submit"],
+input[type="submit"] {
+  background: #137bac;
+  color: white;
+  border: none;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 10px;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+  transition: all 0.25s ease;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background: #bf1650;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+button[type="submit"]:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+input:disabled {
+  opacity: 0.4;
+}
+
+input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+button[type="submit"],
+input[type="button"],
+/* input[type="submit"] {
+  -webkit-appearance: none;
+}
+ */
+.App {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+button[type="button"] {
+  display: block;
+  appearance: none;
+  /* background: #333; */
+  color: white;
+  border: none;
+  /* text-transform: uppercase; */
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+pre {
+  color: white;
+}
+
+hr {
+  margin-top: 30px;
+}
+
+button {
+  display: block;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+a {
+  color: beige;
+  background-color: blue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+  letter-spacing: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+a:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  background-color: rgb(7, 121, 36);
+}
+
+.filter-text {
+  color: white;
+}
+
+.address {
+  border-radius: 5px;
+  margin-top: 30px;
 }

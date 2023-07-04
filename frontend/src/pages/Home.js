@@ -1,193 +1,210 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from "react";
 import { Link } from 'react-router-dom'
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import Select from "react-select";
 import { useCreateEmployeeMutation } from '../redux/apiSlice'
-import styles from './style/Home.module.css'
-import Select from 'react-select'
-
 import { Modal } from '@k90891695/modalnpm'
 import { useGetAllStatesQuery } from "../redux/apiSlice"
 import { useGetAllDepartmentsQuery } from "../redux/apiSlice"
 
-function Home() {
-  let [isOpen, setIsOpen] = useState(false)
-  let [isOpenError, setIsOpenError] = useState(false)
+const SignupSchema = yup
+  .object({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    dateOfBirth: yup.string().required(),
+    startDate: yup.string().required(),
+    street: yup.string().required(),
+    city: yup.string().required(),
+    state: yup.object().shape({
+      label: yup.string().required(),
+      value: yup.string().required(),
+    }),
+    zipCode: yup.string().required(),
+    department: yup.object().shape({
+      label: yup.string().required(),
+      value: yup.string().required(),
+    }),
+  })
+  .required();
 
-  let [selectState, setSelectState] = useState('')
-  let [selectDepartment, setSelectDepartment] = useState('')
+const Home = () => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(SignupSchema),
+  });
 
-  const [user, setUser] = useState([])
+  const onSubmit = (data) => {
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+    const ClickBirthDateCalendar = new Date(data.dateOfBirth).toLocaleDateString()
+    const ClickStartDateCalendar = new Date(data.startDate).toLocaleDateString()
 
-    if (user.firstName !== undefined & user.lastName !== undefined & ClickBirthDateCalendar !== 'Invalid Date' & ClickStartDateCalendar !== 'Invalid Date' & Department !== undefined & user.street !== undefined & user.city !== undefined & State !== undefined & user.zipCode !== undefined) {
-
-      console.log('submit')
-
-      let formData = {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        dateOfBirth: ClickBirthDateCalendar,
-        startDate: ClickStartDateCalendar,
-        department: Department,
-        street: user.street,
-        city: user.city,
-        state: State,
-        zipCode: user.zipCode,
-      }
-
-      addNewEmployee(formData)
-        .unwrap()
-        .then((payload) => console.log('fulfilled', payload))
-        .catch((error) => console.error('rejected', error))
-
-      setIsOpen(true)
-
-    } else {
-      setIsOpenError(true)
+    const FormData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      dateOfBirth: ClickBirthDateCalendar,
+      startDate: ClickStartDateCalendar,
+      street: data.street,
+      city: data.city,
+      state: data.state.label,
+      zipCode: data.zipCode,
+      department: data.department.label
     }
-  }
+    console.log(FormData)
 
-  const onChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value
-    })
-    console.log(e.target.name)
-  }
+    addNewEmployee(FormData)
+      .unwrap()
+      .then((payload) => console.log('fulfilled', payload))
+      .catch((error) => console.error('rejected', error))
 
-  const ClickBirthDateCalendar = new Date(user.dateOfBirth).toLocaleDateString()
-  const ClickStartDateCalendar = new Date(user.startDate).toLocaleDateString()
+    setIsOpen(true)
+
+    reset(formValues => ({
+      ...formValues,
+      firstName: '',
+      lastName: '',
+      dateOfBirth: null,
+      startDate: null,
+      street: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      department: '',
+    }))
+  };
+
+  const { data } = useGetAllStatesQuery()
+  const { currentData } = useGetAllDepartmentsQuery()
 
   const [addNewEmployee] = useCreateEmployeeMutation()
 
-  const State = selectState.label
-  const Department = selectDepartment.label
-
-  console.log(State)
-
-  const { data } = useGetAllStatesQuery()
-  const [statesData, setStatesData] = useState([])
-  useEffect(() => {
-    setStatesData(data)
-  }, [data])
-
-  const { currentData } = useGetAllDepartmentsQuery()
-  const [departmentsData, setDepartmentsData] = useState([])
-  useEffect(() => {
-    setDepartmentsData(currentData)
-  }, [currentData])
-
-  console.log(statesData)
-
+  let [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div>
+    <>
       <div className="title">
         <h1>HRnet</h1>
       </div>
       <div className="container">
         <Link to="/employee-list">View Current Employees</Link>
         <h2>Create Employee</h2>
-        <form id="create-employee" name="createemployee" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="firstName">
+            <label>First Name</label>
+            <input
+              className='FirstName'
+              {...register("firstName")}
+            />
+            {errors.firstName && <p>This is required</p>}
+          </div>
 
-          <label htmlFor="firstName">First Name</label>
-          <input
-            name='firstName'
-            type="text"
-            id="firstName"
-            value={user.firstName || ""}
-            onChange={onChange}
-          />
+          <div className="lastName">
+            <label>Last Name</label>
+            <input
+              className="LastName"
+              {...register("lastName")}
+            />
+            {errors.lastName && <p>This is required</p>}
+          </div>
 
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            name='lastName'
-            type="text"
-            id="lastName"
-            value={user.lastName || ""}
-            onChange={onChange}
-          />
+          <div className="dateOfBirth">
+            <label>Date of birth</label>
+            <input
+              type="date"
+              className="DateOfBirth"
+              {...register("dateOfBirth")}
+            />
+            {errors.dateOfBirth && <p>This is required</p>}
+          </div>
 
-          <label>Date of birth </label>
-          <input
-            type="date"
-            name="dateOfBirth"
-            value={user.dateOfBirth || ''}
-            onChange={onChange}
-          />
-
-
-          <label>Start date</label>
-          <input
-            type="date"
-            name="startDate"
-            value={user.startDate || ''}
-            onChange={onChange}
-
-          />
+          <div className="startDate">
+            <label>Start date</label>
+            <input
+              type="date"
+              className="StartDate"
+              {...register("startDate")}
+            />
+            {errors.startDate && <p>This is required</p>}
+          </div>
 
           <fieldset className="address">
             <legend>Address</legend>
+            <div className="street">
+              <label>Street</label>
+              <input
+                className="Street"
+                {...register("street")}
+              />
+              {errors.street && <p>This is required</p>}
+            </div>
 
-            <label htmlFor="street">Street</label>
-            <input
-              name='street'
-              id="street"
-              type="text"
-              value={user.street || ""}
-              onChange={onChange}
-            />
+            <div className="city">
+              <label>City</label>
+              <input
+                className="City"
+                {...register("city")}
+              />
+              {errors.city && <p>This is required</p>}
+            </div>
 
-            <label htmlFor="city">City</label>
-            <input
-              name='city'
-              id="city"
-              type="text"
-              value={user.city || ""}
-              onChange={onChange}
-            />
+            <div className="state">
+              <label>State</label>
+              <Controller
+                name="state"
+                control={control}
+                render={({ field }) => {
+                  return (
+                    <Select
+                      {...field}
+                      options={data}
+                    />
+                  );
+                }}
+              />
+              {errors.state && <p>This is required</p>}
+            </div>
 
-            <label htmlFor="data-state">State</label>
-            <Select
-              className='data-state'
-              classNamePrefix='selectState'
-              options={statesData}
-              value={selectState}
-              onChange={setSelectState}
-            />
-
-            <label htmlFor="zipCode">Zip Code</label>
-            <input
-              name='zipCode'
-              id="zipCode"
-              type="number"
-              value={user.zipCode || ""}
-              onChange={onChange}
-            />
+            <div className="zipCode">
+              <label>Zip Code</label>
+              <input
+                className='ZipCode'
+                {...register("zipCode")}
+              />
+              {errors.zipCode && <p>This is required</p>}
+            </div>
           </fieldset>
 
-          <label htmlFor="data-department">Department</label>
-          <Select
-            className='data-department'
-            classNamePrefix='selectDepartment'
-            options={departmentsData}
-            value={selectDepartment}
-            onChange={setSelectDepartment}
-          />
+          <div className="department">
+            <label>Department</label>
+            <Controller
+              name="department"
+              className="department"
+              control={control}
+              render={({ field }) => {
+                return (
+                  <Select
+                    {...field}
+                    options={currentData}
+                  />
+                );
+              }}
+            />
+            {errors.department && <p>This is required</p>}
+          </div>
 
-          <button className={styles.primaryBtn} id='save' type="submit">Save</button>
-          {/* {isOpen && <Modal setIsOpen={() => {setIsOpen(); setUser([]); setSelectState(''); setSelectDepartment(''); setDateOfBirth(''); setStartDate('')}} color={'#d0fefd'} information={'Information'} commentary={'Employee Created !'} action={'Close'} />} */}
-          {isOpen && <Modal setIsOpen={() => { setIsOpen(); setUser([]); }} color={'#d0fefd'} information={'Information'} commentary={'Employee Created !'} action={'Close'} />}
-
-
-          {isOpenError && <Modal setIsOpen={setIsOpenError} color={'#fecccc'} information={'Information'} commentary={'Employee Not Created ! Please complete all fields.'} action={'Close'} />}
+          <input className="submit" type="submit" value={'Save'} />
+          {isOpen && <Modal setIsOpen={() => { setIsOpen(); }} color={'#d0fefd'} information={'Information'} commentary={'Employee Created !'} action={'Close'} />}
 
         </form>
-
       </div>
-    </div>
-  )
+    </>
+  );
 }
 
-export default Home
+export default Home;

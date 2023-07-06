@@ -37,7 +37,7 @@ npm start
 Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
 
 ## API information
-You can use : /
-[http://localhost:3000/api/state](http://localhost:3000/api/state) to view all states in your browser. /
-[http://localhost:3000/api/department](http://localhost:3000/api/departments) to view all departments in your browser. /
-[http://localhost:3000/api/employee](http://localhost:3000/api/employee) to view all employees in your browser. /
+You can use :  
+[http://localhost:3000/api/state](http://localhost:3000/api/state) to view all states in your browser.  
+[http://localhost:3000/api/department](http://localhost:3000/api/departments) to view all departments in your browser.  
+[http://localhost:3000/api/employee](http://localhost:3000/api/employee) to view all employees in your browser.  

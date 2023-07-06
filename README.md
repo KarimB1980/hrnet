@@ -6,7 +6,7 @@
 
 # Available Scripts
 
-## Before start the project, you must install the dependencies in the directory "backend" with :
+## You must install the dependencies in the directory "backend" and start the backend with :
 
 ### Go to backend directory
 cd backend
@@ -21,7 +21,7 @@ npm run dev:server
 npm run populate-db
 
 
-## Before start the project, you must install the dependencies in the directory "frontend" with :
+## You must install the dependencies in the directory "frontend" and start the frontend with :
 
 ### Go to frontend directory
 cd frontend

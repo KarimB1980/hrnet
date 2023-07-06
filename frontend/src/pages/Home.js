@@ -56,7 +56,6 @@ const Home = () => {
       zipCode: data.zipCode,
       department: data.department.label
     }
-    console.log(FormData)
 
     addNewEmployee(FormData)
       .unwrap()
@@ -96,8 +95,10 @@ const Home = () => {
         <h2>Create Employee</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="firstName">
-            <label>First Name</label>
+            <label htmlFor="firstName">First Name</label>
             <input
+              id="firstName"
+              name="firstName"
               className='FirstName'
               {...register("firstName")}
             />
@@ -105,8 +106,10 @@ const Home = () => {
           </div>
 
           <div className="lastName">
-            <label>Last Name</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
+              id="lastName"
+              name="lastName"
               className="LastName"
               {...register("lastName")}
             />
@@ -114,8 +117,10 @@ const Home = () => {
           </div>
 
           <div className="dateOfBirth">
-            <label>Date of birth</label>
+            <label htmlFor="dateOfBirth">Date of birth</label>
             <input
+              id="dateOfBirth"
+              name="dateOfBirth"
               type="date"
               className="DateOfBirth"
               {...register("dateOfBirth")}
@@ -124,8 +129,10 @@ const Home = () => {
           </div>
 
           <div className="startDate">
-            <label>Start date</label>
+            <label htmlFor="startDate">Start date</label>
             <input
+              id="startDate"
+              name="startDate"
               type="date"
               className="StartDate"
               {...register("startDate")}
@@ -136,8 +143,10 @@ const Home = () => {
           <fieldset className="address">
             <legend>Address</legend>
             <div className="street">
-              <label>Street</label>
+              <label htmlFor="Street">Street</label>
               <input
+                id="Street"
+                name="Street"
                 className="Street"
                 {...register("street")}
               />
@@ -145,8 +154,10 @@ const Home = () => {
             </div>
 
             <div className="city">
-              <label>City</label>
+              <label htmlFor="City">City</label>
               <input
+                id="City"
+                name="City"
                 className="City"
                 {...register("city")}
               />
@@ -154,13 +165,15 @@ const Home = () => {
             </div>
 
             <div className="state">
-              <label>State</label>
+              <label htmlFor="state">State</label>
               <Controller
                 name="state"
+                className='State'
                 control={control}
                 render={({ field }) => {
                   return (
                     <Select
+                      inputId="state"
                       {...field}
                       options={data}
                     />
@@ -171,8 +184,10 @@ const Home = () => {
             </div>
 
             <div className="zipCode">
-              <label>Zip Code</label>
+              <label htmlFor="ZipCode">Zip Code</label>
               <input
+                id="ZipCode"
+                name="ZipCode"
                 className='ZipCode'
                 {...register("zipCode")}
               />
@@ -181,14 +196,15 @@ const Home = () => {
           </fieldset>
 
           <div className="department">
-            <label>Department</label>
+            <label htmlFor="department">Department</label>
             <Controller
               name="department"
-              className="department"
+              className="Department"
               control={control}
               render={({ field }) => {
                 return (
                   <Select
+                    inputId="department"
                     {...field}
                     options={currentData}
                   />

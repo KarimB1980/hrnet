@@ -21,8 +21,12 @@ app.use(express.urlencoded({ extended: true }))
 // Handle custom routes
 app.use('/api/', require('./routes/employeeRoutes'))
 
+// Cache-Control
+app.set('Cache-Control', 'client/build/static, max-age=31557600');
+
+// API welcome message
 app.get('/', (req, res, next) => {
-  res.send('Hello from my Express server v2!')
+  res.send('Welcome to the Express server HRnet')
 })
 
 app.listen(PORT, () => {

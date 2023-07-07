@@ -189,6 +189,7 @@ const Home = () => {
                 id="ZipCode"
                 name="ZipCode"
                 className='ZipCode'
+                type="number"
                 {...register("zipCode")}
               />
               {errors.zipCode && <p>This is required</p>}

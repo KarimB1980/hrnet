@@ -6,6 +6,7 @@
 
 # Available Scripts
 
+## This backend use MongoDB database
 ## You must install the dependencies in the directory "backend" and start the backend with :
 
 ### Go to backend directory

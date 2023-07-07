@@ -12,7 +12,6 @@
   -webkit-text-stroke: 1px rgb(0, 0, 0);
   font-size: 16px;
   font-weight: 900;
-  /* width: 120px; */
   white-space: pre-wrap;
   flex-wrap: nowrap;
   text-overflow: clip;
@@ -22,16 +21,3 @@
   border: 2px solid #9CA3AF;
   border-radius: 5px;
 }
-
-
-/* .hgByPU div:first-child {
-  white-space: pre-wrap;
-  overflow: visible;
-  text-overflow: ellipsis;
-}
-
-.rdt_ExpanderRow {
-  white-space: pre-wrap;
-  flex-wrap: nowrap;
-  text-overflow: clip;
-} */

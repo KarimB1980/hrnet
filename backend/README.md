@@ -6,7 +6,7 @@ This codebase contains the code needed to run the backend for HRnet.
 
 ### Prerequisites
 
-Argent Bank uses the following tech stack:
+HRnet uses the following tech stack:
 
 - [Node.js v18.16](https://nodejs.org/en/)
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community)
@@ -39,4 +39,4 @@ Your server should now be running at http://locahost:3000 and you will now have 
 
 ## Populated Database Data
 
-Once you run the `populate-db` script, you should have states and departments in your database:
+Once you run the `populate-db` script, you should have states and departments in your database

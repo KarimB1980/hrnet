@@ -1,5 +1,4 @@
 body {
-  /* background: #0e101c; */
   background-image: url('../../assets/background.webp');
   background-size: 100% auto;
   background-attachment: fixed;
@@ -55,7 +54,6 @@ h2, legend {
 }
 
 p {
-  /* color: #bf1650; */
   color: red;
   margin-top: 0;
   border: 2px solid red;
@@ -89,14 +87,10 @@ label, .sc-iHGNWf, .sc-bXCLTC option {
   line-height: 2;
   text-align: left;
   display: block;
-  /* margin-bottom: 13px; */
   margin-top: 20px;
   color: white;
   font-size: 20px;
   font-weight: 900;
-  /* background-color: black;
-  padding: 5px;
-  border-radius: 5px; */
   -webkit-text-stroke: 1px rgb(0, 0, 0);
 }
 
@@ -145,12 +139,6 @@ input[type="button"]:hover {
   transition: 0.3s all;
 }
 
-button[type="submit"],
-input[type="button"],
-/* input[type="submit"] {
-  -webkit-appearance: none;
-}
- */
 .App {
   max-width: 1400px;
   margin: 0 auto;
@@ -159,10 +147,8 @@ input[type="button"],
 button[type="button"] {
   display: block;
   appearance: none;
-  /* background: #333; */
   color: white;
   border: none;
-  /* text-transform: uppercase; */
   padding: 10px 20px;
   border-radius: 4px;
 }

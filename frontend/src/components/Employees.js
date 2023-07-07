@@ -6,15 +6,9 @@ import DataTableExtensions from "react-data-table-component-extensions"
 import "react-data-table-component-extensions/dist/index.css"
 import "./style/Employees.css"
 
-// createTheme creates a new theme named solarized that overrides the build in dark theme
-createTheme('solarized', {
-  text: {
-    // primary: '#268bd2',
-    // secondary: '#2aa198',
-    // shadow: '#FC0 1px 0 10px'
-  },
+// createTheme creates a new theme named space that overrides the build in dark theme
+createTheme('space', {
   background: {
-    // default: '#002b36',
     default: 'transparent',
   },
   context: {
@@ -126,7 +120,7 @@ function EmployeesList() {
           defaultSortAsc={false}
           pagination
           highlightOnHover
-          theme="solarized"
+          theme="space"
         />
       </DataTableExtensions>
     </div>

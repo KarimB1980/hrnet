@@ -1,7 +1,3 @@
-.data-table-extensions-action {
-  display: none;
-}
-
 .icon {
   margin-top: 0;
   margin-bottom: 0;
@@ -17,7 +13,30 @@
   text-overflow: clip;
 }
 
+.rdt_TableHead {
+  background-color: rgba(4, 29, 253, 0.2);
+  font-size: 16px;
+  font-weight: 900;
+  white-space: pre-wrap;
+  flex-wrap: nowrap;
+  text-overflow: clip;  
+}
+
+.brFloq {
+  font-size: 16px;
+}
+
 .main {
   border: 2px solid #9CA3AF;
   border-radius: 5px;
+}
+
+.loadingerror {
+  color: white;
+  padding: 0.7rem 1.2rem;
+  background-color: rgba(4, 29, 253, 0.2);
+}
+
+.sc-iwjfmR div {
+  background-color: rgba(4, 29, 253, 0.2);
 }

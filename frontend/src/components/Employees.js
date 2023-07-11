@@ -2,7 +2,6 @@ import { useGetAllEmployeesQuery } from "../redux/apiSlice"
 import React, { useState, useEffect } from "react"
 import DataTable, { createTheme } from "react-data-table-component"
 import DataTableExtensions from "react-data-table-component-extensions"
-
 import "react-data-table-component-extensions/dist/index.css"
 import "./style/Employees.css"
 
@@ -25,13 +24,14 @@ createTheme('space', {
   },
 }, 'dark');
 
+// create table columns
 const columns = [
   {
     name: 'First Name',
     selector: row => row.firstName,
     sortable: true,
     wrap: true,
-    minWidth: '150px' 
+    minWidth: '150px'
   },
   {
     name: 'Last Name',
@@ -86,15 +86,18 @@ const columns = [
     name: 'Zip Code',
     selector: row => row.zipCode,
     sortable: true,
-    wrap: true
+    wrap: true,
+    minWidth: '150px'
   },
-];
+]
 
-function EmployeesList() {
 
+const EmployeesList = () => {
+  // recovery of employees
   const { data, error, isLoading, refetch } = useGetAllEmployeesQuery()
   const [employeesData, setEmployeesData] = useState([])
 
+  // Refreshing the list of employees
   useEffect(() => {
     refetch()
     setEmployeesData(data)
@@ -107,9 +110,13 @@ function EmployeesList() {
 
   return (
     <div className="main">
-      {isLoading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
-      <DataTableExtensions {...tableData}>
+      {isLoading && <div className="loadingerror">Loading...</div>}
+      {error && <div className="loadingerror">An error has occurred, we apologize for the inconvenience caused.</div>}
+      <DataTableExtensions 
+        print={false}
+        export={false}
+        {...tableData}
+      >
         <DataTable
           columns={
             columns

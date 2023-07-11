@@ -1,7 +1,7 @@
 const employeeService = require('../services/employeeService')
-const State = require("../database/models/stateModel");
-const Department = require("../database/models/departmentModel");
-const Employee = require("../database/models/employeeModel");
+const State = require("../database/models/stateModel")
+const Department = require("../database/models/departmentModel")
+const Employee = require("../database/models/employeeModel")
 
 module.exports.createState = async (req, res) => {
   let response = {}

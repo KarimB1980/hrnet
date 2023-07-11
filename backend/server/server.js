@@ -21,8 +21,29 @@ app.use(express.urlencoded({ extended: true }))
 // Handle custom routes
 app.use('/api/', require('./routes/employeeRoutes'))
 
-// Cache-Control
-app.set('Cache-Control', 'client/build/static, max-age=31557600');
+
+app.use(function (req, res, next) {
+  res.set('Cache-control', 'public, max-age=300')
+})
+
+
+// var options = {
+//   dotfiles: 'ignore',
+//   etag: false,
+//   extensions: ['htm', 'html'],
+//   index: false,
+//   maxAge: '1d',
+//   redirect: false,
+//   setHeaders: function (res, path, stat) {
+//     res.set('x-timestamp', Date.now())
+//   }
+// }
+
+// app.use(express.static('client/build', options))
+
+
+// // Cache-Control
+// app.set('Cache-Control', 'client/build/static, max-age=31557600');
 
 // API welcome message
 app.get('/', (req, res, next) => {

@@ -1,26 +1,26 @@
 #page-erreur-404 {
-    margin-top: 50px;
-  }
-  
-  #page-erreur-404 h1 {
-    text-align: center;
-    color: red;
-  }
-  
-  #page-erreur-404 h2 {
-    text-align: center;
-    color: blue;  
-  }
-  
-  #page-erreur-404 h3 {
-    text-align: center;
-    color: black;  
-  }
-  #page-erreur-404 h3:hover {
-    text-decoration: underline;
-  }
-  
-  #page-erreur-404 a {
-    text-align: center;
-    color: black;
-  }
+  margin-top: 50px;
+}
+
+#page-erreur-404 h1 {
+  text-align: center;
+  color: red;
+}
+
+#page-erreur-404 h2 {
+  text-align: center;
+  color: blue;  
+}
+
+#page-erreur-404 h3 {
+  text-align: center;
+  color: black;  
+}
+#page-erreur-404 h3:hover {
+  text-decoration: underline;
+}
+
+#page-erreur-404 a {
+  text-align: center;
+  color: black;
+}

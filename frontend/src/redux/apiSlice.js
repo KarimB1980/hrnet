@@ -1,5 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
+// creation of apiSlice
 export const apiSlice = createApi({
   reducerPath: "apiSlice",
   baseQuery: fetchBaseQuery({ 
@@ -31,6 +32,6 @@ export const apiSlice = createApi({
     }),
     invalidatesTags: ['Employee'],
   }),
-});
+})
 
 export const { useGetAllEmployeesQuery,useCreateEmployeeMutation,useGetAllStatesQuery,useGetAllDepartmentsQuery } = apiSlice;

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import { Link } from 'react-router-dom'
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import Select from "react-select";
+import { Controller, useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import Select from "react-select"
 import { useCreateEmployeeMutation } from '../redux/apiSlice'
 import { Modal } from '@k90891695/modalnpm'
 import { useGetAllStatesQuery } from "../redux/apiSlice"
 import { useGetAllDepartmentsQuery } from "../redux/apiSlice"
 
-const SignupSchema = yup
+// yup schema creation
+const EmployeeSchema = yup
   .object({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
@@ -21,15 +22,17 @@ const SignupSchema = yup
       label: yup.string().required(),
       value: yup.string().required(),
     }),
-    zipCode: yup.string().required(),
+    zipCode: yup.number().required(),
     department: yup.object().shape({
       label: yup.string().required(),
       value: yup.string().required(),
     }),
   })
-  .required();
+  .required()
 
+// creation of the homepage  
 const Home = () => {
+  // useform properties
   const {
     register,
     handleSubmit,
@@ -37,14 +40,16 @@ const Home = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(SignupSchema),
-  });
+    resolver: yupResolver(EmployeeSchema),
+  })
 
+  // code following a click on the "save" button
   const onSubmit = (data) => {
-
+    // convert dates to dd/mm/yyyy format
     const ClickBirthDateCalendar = new Date(data.dateOfBirth).toLocaleDateString()
     const ClickStartDateCalendar = new Date(data.startDate).toLocaleDateString()
 
+    // format of the data to send to the API
     const FormData = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -57,13 +62,16 @@ const Home = () => {
       department: data.department.label
     }
 
+    // send data to API
     addNewEmployee(FormData)
       .unwrap()
       .then((payload) => console.log('fulfilled', payload))
       .catch((error) => console.error('rejected', error))
 
+    // open the modal
     setIsOpen(true)
 
+    // form reset
     reset(formValues => ({
       ...formValues,
       firstName: '',
@@ -76,13 +84,15 @@ const Home = () => {
       zipCode: '',
       department: '',
     }))
-  };
+  }
 
+  // recovery of states
   const { data } = useGetAllStatesQuery()
+  // recovery of departments
   const { currentData } = useGetAllDepartmentsQuery()
-
+  // creating a new employee
   const [addNewEmployee] = useCreateEmployeeMutation()
-
+  // open/close the modal
   let [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -174,6 +184,7 @@ const Home = () => {
                   return (
                     <Select
                       inputId="state"
+                      placeholder={<div className="select-state-placeholder-text">Select state...</div>}
                       {...field}
                       options={data}
                     />
@@ -206,6 +217,8 @@ const Home = () => {
                 return (
                   <Select
                     inputId="department"
+                    placeholder={<div className="select-department-placeholder-text">Select department...</div>}
+                    classNamePrefix="DepartmentSelect"
                     {...field}
                     options={currentData}
                   />
@@ -221,7 +234,7 @@ const Home = () => {
         </form>
       </div>
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

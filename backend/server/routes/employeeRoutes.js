@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const employeeController = require('../controllers/employeeController')
 
-// Retrieve all States
+// Create State
 router.post('/state', employeeController.createState)
 
-// Retrieve all Departments
+// Create Department
 router.post('/department', employeeController.createDepartment)
 
 // Retrieve all States

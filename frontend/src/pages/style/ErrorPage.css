@@ -9,7 +9,7 @@
 
 #page-erreur-404 h2 {
   text-align: center;
-  color: blue;  
+  color: white;  
 }
 
 #page-erreur-404 h3 {
@@ -17,10 +17,11 @@
   color: black;  
 }
 #page-erreur-404 h3:hover {
-  text-decoration: underline;
+  transform: scale(1.2);
+  transition: all 0.25s ease;
 }
 
 #page-erreur-404 a {
   text-align: center;
-  color: black;
+  color: white;
 }

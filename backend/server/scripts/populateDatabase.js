@@ -2,6 +2,7 @@ const axios = require('axios')
 const stateApi = 'http://localhost:3000/api/state'
 const departmentApi = 'http://localhost:3000/api/department'
 
+// list of states
 const states = [
   {
     label: "Alabama",
@@ -239,8 +240,9 @@ const states = [
     label: "Wyoming",
     value: "WY"
   }
-];
+]
 
+// list of departments
 const departments = [
   {
     label: "Sales",
@@ -264,17 +266,17 @@ const departments = [
   },
 ]
 
-
+// creation of states in the database
 states.forEach(state => {
   axios
     .post(stateApi, state)
-    .then(response => console.log(response))
+    .then(console.log('State successfully created'))
     .catch(error => console.log(error))
 })
-
+// creation of departments in the database
 departments.forEach(department => {
   axios
     .post(departmentApi, department)
-    .then(response => console.log(response))
+    .then(console.log('Department successfully created'))
     .catch(error => console.log(error))
 })

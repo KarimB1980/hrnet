@@ -4,7 +4,7 @@
 }
 
 .rdt_TableCell {
-  background-color: rgba(255, 0, 0, .2);
+  background-color: rgba(255, 0, 0, .3);
   -webkit-text-stroke: 1px rgb(0, 0, 0);
   font-size: 16px;
   font-weight: 900;
@@ -14,7 +14,7 @@
 }
 
 .rdt_TableHead {
-  background-color: rgba(4, 29, 253, 0.2);
+  background-color: rgba(4, 29, 253, 0.3);
   font-size: 16px;
   font-weight: 900;
   white-space: pre-wrap;
@@ -34,9 +34,9 @@
 .loadingerror {
   color: white;
   padding: 0.7rem 1.2rem;
-  background-color: rgba(4, 29, 253, 0.2);
+  background-color: rgba(4, 29, 253, 0.3);
 }
 
 .sc-iwjfmR div {
-  background-color: rgba(4, 29, 253, 0.2);
+  background-color: rgba(4, 29, 253, 0.3);
 }

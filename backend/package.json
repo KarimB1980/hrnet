@@ -21,9 +21,9 @@
     "yamljs": "^0.3.0"
   },
   "scripts": {
-    "dev:server": "nodemon ./server/server.js",
+    "dev:server": "nodemon -r dotenv/config ./server/server.js",
     "populate-db": "node ./server/scripts/populateDatabase.js",
-    "server": "node ./server/server.js"
+    "server": "node -r dotenv/config ./server/server.js"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

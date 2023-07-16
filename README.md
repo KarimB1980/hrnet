@@ -15,7 +15,7 @@ cd backend
 ### Install dependencies
 npm install
 
-### In the file .env.example, set your database to DATABASE_URL="" parameter
+### In the file .env.example, set your database to DATABASE_URL= parameter
 Rename the file .env.example to .env
 
 ### Start local dev server

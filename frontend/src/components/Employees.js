@@ -91,7 +91,6 @@ const columns = [
   },
 ]
 
-
 const EmployeesList = () => {
   // recovery of employees
   const { data, error, isLoading, refetch } = useGetAllEmployeesQuery()
@@ -106,7 +105,7 @@ const EmployeesList = () => {
   const tableData = {
     columns,
     data
-  };
+  }
 
   return (
     <div className="main">

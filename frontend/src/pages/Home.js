@@ -188,7 +188,7 @@ const Home = () => {
                       {...field}
                       options={data}
                     />
-                  );
+                  )
                 }}
               />
               {errors.state && <p>This is required</p>}

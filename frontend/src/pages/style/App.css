@@ -214,3 +214,7 @@ a:hover {
 .select-state-placeholder-text, .select-department-placeholder-text {
   color: black;
 }
+
+.sc-hmdomO div {
+  background-color: rgba(4, 29, 253, 0.3);
+}
